@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }} — {{ config.title }}{% endblock title %}
+{% block description %}{{ page.description | default(value=config.description) }}{% endblock description %}
+
+{% block content %}
+
+<article class="sect">
+
+  <header style="margin-bottom: 2rem; border-bottom: 1px solid var(--color-border); padding-bottom: 1.5rem;">
+    <div class="sect-label">
+      {%- if page.taxonomies.tags %}
+        {{ page.taxonomies.tags | join(sep=" · ") }}
+      {%- else %}
+        {{ page.ancestors | last | default(value="Writing") }}
+      {%- endif %}
+    </div>
+    <h1 style="font-size: 36px; font-weight: normal; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 0.75rem;">
+      {{ page.title }}
+    </h1>
+    {% if page.date %}
+    <time style="font-family: sans-serif; font-size: 13px; color: var(--color-muted);">
+      {{ page.date | date(format="%B %d, %Y") }}
+    </time>
+    {% endif %}
+  </header>
+
+  <div class="prose">
+    {{ page.content | safe }}
+  </div>
+
+</article>
+
+{% endblock content %}

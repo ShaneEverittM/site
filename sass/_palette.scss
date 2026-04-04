@@ -1,0 +1,19 @@
+// ─── Birch & Cream — raw stops ───────────────────────────────────────────────
+
+$parchment : #F7F2E8;   // lightest bg
+$raw-linen : #E6DBCB;   // surface / footer bg
+$wheat     : #C8B49A;   // borders, dividers
+$caramel   : #9A7A5E;   // accent text, labels, links
+$bark      : #634D3A;   // body / supporting text
+$espresso  : #3A2B1E;   // headings, strong text
+
+// ─── Semantic CSS custom properties ──────────────────────────────────────────
+
+:root {
+  --color-bg       : #{$parchment};
+  --color-surface  : #{$raw-linen};
+  --color-border   : #{$wheat};
+  --color-muted    : #{$caramel};
+  --color-body     : #{$bark};
+  --color-heading  : #{$espresso};
+}
