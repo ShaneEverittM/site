@@ -1,0 +1,339 @@
+@use "palette";
+
+// ─── Reset ───────────────────────────────────────────────────────────────────
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+// ─── Base ─────────────────────────────────────────────────────────────────────
+
+body {
+  background : var(--color-bg);
+  color      : var(--color-heading);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size  : 16px;
+  line-height: 1.6;
+}
+
+a {
+  color          : var(--color-muted);
+  text-decoration: none;
+
+  &:hover { text-decoration: underline; }
+}
+
+// ─── Utilities ────────────────────────────────────────────────────────────────
+
+.label {
+  font-family   : sans-serif;
+  font-size     : 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color         : var(--color-muted);
+}
+
+// ─── Layout ───────────────────────────────────────────────────────────────────
+
+.site-wrap {
+  max-width: 1200px;
+  margin   : 0 auto;
+}
+
+// ─── Nav ─────────────────────────────────────────────────────────────────────
+
+.site-nav {
+  display        : flex;
+  align-items    : center;
+  justify-content: space-between;
+  padding        : 1.25rem 2.5rem;
+  border-bottom  : 1px solid var(--color-border);
+}
+
+.site-logo {
+  font-size     : 17px;
+  letter-spacing: -0.01em;
+  color         : var(--color-heading);
+
+  &:hover { text-decoration: none; }
+}
+
+.nav-links {
+  display: flex;
+  gap    : 1.5rem;
+
+  a {
+    font-family   : sans-serif;
+    font-size     : 13px;
+    letter-spacing: 0.03em;
+    color         : var(--color-muted);
+  }
+}
+
+// ─── Hero ─────────────────────────────────────────────────────────────────────
+
+.hero {
+  padding      : 4rem 2.5rem 3rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.hero-headline {
+  font-size     : 48px;
+  font-weight   : normal;
+  line-height   : 1.1;
+  letter-spacing: -0.025em;
+  color         : var(--color-heading);
+  margin-bottom : 1.25rem;
+}
+
+.hero-subtext {
+  font-family: sans-serif;
+  font-size  : 15px;
+  line-height: 1.7;
+  color      : var(--color-body);
+  max-width  : 520px;
+}
+
+.hero-tags {
+  display   : flex;
+  flex-wrap : wrap;
+  gap       : 8px;
+  margin-top: 1.5rem;
+}
+
+.tag {
+  font-family   : sans-serif;
+  font-size     : 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding       : 4px 11px;
+  border        : 1px solid var(--color-border);
+  border-radius : 20px;
+  color         : var(--color-body);
+}
+
+// ─── Sections ─────────────────────────────────────────────────────────────────
+
+.sect {
+  padding      : 2.5rem 2.5rem;
+  border-bottom: 1px solid var(--color-border);
+
+  &:last-of-type { border-bottom: none; }
+}
+
+.sect-label {
+  @extend .label;
+  margin-bottom: 1.25rem;
+}
+
+// ─── About ────────────────────────────────────────────────────────────────────
+
+.about-grid {
+  display              : grid;
+  grid-template-columns: 1fr 1fr;
+  gap                  : 2rem;
+  align-items          : start;
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.about-text p {
+  font-family  : sans-serif;
+  font-size    : 15px;
+  line-height  : 1.75;
+  color        : var(--color-body);
+  margin-bottom: 0.75rem;
+}
+
+.about-aside {
+  background   : var(--color-surface);
+  border       : 1px solid var(--color-border);
+  border-radius: 8px;
+  padding      : 1.25rem;
+}
+
+.aside-row {
+  display       : flex;
+  justify-content: space-between;
+  padding       : 7px 0;
+  border-bottom : 1px solid var(--color-border);
+  font-family   : sans-serif;
+  font-size     : 13px;
+
+  &:last-child { border-bottom: none; padding-bottom: 0; }
+}
+
+.aside-key { color: var(--color-muted); }
+.aside-val { font-weight: 500; color: var(--color-heading); }
+
+// ─── Work cards ───────────────────────────────────────────────────────────────
+
+.work-grid {
+  display              : grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap                  : 1rem;
+}
+
+.work-card {
+  border       : 1px solid var(--color-border);
+  border-radius: 8px;
+  overflow     : hidden;
+}
+
+.work-card-thumb {
+  display   : block;
+  width     : 100%;
+  height    : 120px;
+  object-fit: cover;
+  background: var(--color-body);
+
+  &--light  { background: var(--color-border); }
+  &--mid    { background: var(--color-muted); }
+  &--dark   { background: var(--color-body); }
+  &--darkest{ background: var(--color-heading); }
+}
+
+.work-card-body {
+  padding   : 0.85rem 1rem;
+  background: var(--color-bg);
+}
+
+.work-card-title {
+  font-family  : Georgia, serif;
+  font-size    : 15px;
+  color        : var(--color-heading);
+  margin-bottom: 3px;
+}
+
+.work-card-meta {
+  font-family: sans-serif;
+  font-size  : 12px;
+  color      : var(--color-muted);
+}
+
+// ─── Writing list ─────────────────────────────────────────────────────────────
+
+.writing-list { margin-top: 0.25rem; }
+
+.writing-row {
+  display        : flex;
+  justify-content: space-between;
+  align-items    : baseline;
+  padding        : 0.85rem 0;
+  border-bottom  : 1px solid var(--color-border);
+  gap            : 1rem;
+
+  &:last-child { border-bottom: none; }
+}
+
+.writing-title {
+  font-family: Georgia, serif;
+  font-size  : 15px;
+  color      : var(--color-heading);
+}
+
+.writing-date {
+  font-family: sans-serif;
+  font-size  : 12px;
+  color      : var(--color-muted);
+  white-space: nowrap;
+}
+
+// ─── Page content (prose) ────────────────────────────────────────────────────
+
+.prose {
+  font-family: sans-serif;
+  font-size  : 15px;
+  line-height: 1.75;
+  color      : var(--color-body);
+  max-width  : 640px;
+
+  h1, h2, h3 {
+    font-family  : Georgia, serif;
+    font-weight  : normal;
+    color        : var(--color-heading);
+    margin-top   : 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  p { margin-bottom: 1rem; }
+
+  a { color: var(--color-muted); }
+
+  code {
+    font-size  : 0.875em;
+    background : var(--color-surface);
+    border     : 1px solid var(--color-border);
+    border-radius: 3px;
+    padding    : 1px 5px;
+  }
+
+  table {
+    width          : 100%;
+    border-collapse: collapse;
+    margin-bottom  : 1rem;
+    font-size      : 14px;
+  }
+
+  th, td {
+    padding    : 0.5rem 0.75rem;
+    border     : 1px solid var(--color-border);
+    text-align : left;
+  }
+
+  th {
+    background: var(--color-surface);
+    color     : var(--color-heading);
+    font-weight: 600;
+  }
+
+  pre {
+    background   : var(--color-surface);
+    border       : 1px solid var(--color-border);
+    border-radius: 6px;
+    padding      : 1.25rem;
+    overflow-x   : auto;
+    margin-bottom: 1rem;
+
+    code { background: none; border: none; padding: 0; }
+
+    code[data-name]::before {
+      content        : attr(data-name);
+      display        : block;
+      font-size      : 11px;
+      letter-spacing : 0.05em;
+      color          : var(--color-muted);
+      margin-bottom  : 0.75em;
+      padding-bottom : 0.5em;
+      border-bottom  : 1px solid var(--color-border);
+    }
+  }
+}
+
+// ─── Footer ───────────────────────────────────────────────────────────────────
+
+.site-footer {
+  display        : flex;
+  justify-content: space-between;
+  align-items    : center;
+  padding        : 1.5rem 2.5rem;
+  background     : var(--color-surface);
+  border-top     : 1px solid var(--color-border);
+}
+
+.footer-name {
+  font-family: Georgia, serif;
+  font-size  : 14px;
+  color      : var(--color-body);
+}
+
+.footer-links {
+  display: flex;
+  gap    : 1.25rem;
+
+  a {
+    font-family: sans-serif;
+    font-size  : 12px;
+    color      : var(--color-muted);
+  }
+}

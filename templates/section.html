@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="sect">
+  <div class="sect-label">{{ section.title }}</div>
+  <div class="writing-list">
+    {% for page in section.pages %}
+    <a href="{{ page.permalink }}" class="writing-row">
+      <span class="writing-title">{{ page.title }}</span>
+      {% if page.date %}
+      <span class="writing-date">{{ page.date | date(format="%b %Y") }}</span>
+      {% endif %}
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock content %}

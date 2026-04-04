@@ -1,0 +1,37 @@
+base_url = "https://shanemurphy.space"
+title = "Shane Murphy's Site"
+description = "My personal site."
+compile_sass = true
+minify_html = false
+
+[markdown.highlighting]
+theme = "catppuccin-latte"
+
+[extra]
+hero_headline = "Engineer,<br>musician,<br>human."
+hero_subtext = "I make software for space and music for earth. Based in Santa Barbara — working locally, open source, and in the studio."
+hero_tags = ["Software", "Space", "Music", "Gaming"]
+
+github = "https://github.com/ShaneEverittM"
+linkedin = "https://www.linkedin.com/in/shane-everitt-murphy/"
+email = "mail@shanemurphy.space"
+
+[[extra.about_facts]]
+key = "Location"
+value = "Santa Barbara, CA"
+
+[[extra.about_facts]]
+key = "Role"
+value = "Spaceraft Software Engineer"
+
+[[extra.about_facts]]
+key = "Stack"
+value = "Rust, Python, Yocto"
+
+[[extra.about_facts]]
+key = "Instruments"
+value = "Guitar, Keyboard, Bass"
+
+[[extra.about_facts]]
+key = "Status"
+value = "Growing"
