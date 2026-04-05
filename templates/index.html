@@ -4,34 +4,38 @@
 
 {# ── Hero ──────────────────────────────────────────────────────────────────── #}
 <section class="hero">
-  <h1 class="hero-headline">{{ config.extra.hero_headline | safe }}</h1>
-  <p class="hero-subtext">{{ config.extra.hero_subtext }}</p>
-  {% if config.extra.hero_tags %}
-  <div class="hero-tags">
-    {% for tag in config.extra.hero_tags %}
-      <span class="tag">{{ tag }}</span>
-    {% endfor %}
+  <div class="inner">
+    <h1 class="hero-headline">{{ config.extra.hero_headline | safe }}</h1>
+    <p class="hero-subtext">{{ config.extra.hero_subtext }}</p>
+    {% if config.extra.hero_tags %}
+    <div class="hero-tags">
+      {% for tag in config.extra.hero_tags %}
+        <span class="tag">{{ tag }}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
   </div>
-  {% endif %}
 </section>
 
 {# ── About ─────────────────────────────────────────────────────────────────── #}
 <section class="sect">
-  <div class="sect-label">About</div>
-  <div class="about-grid">
-    <div class="about-text">
-      {{ section.content | safe }}
-    </div>
-    {% if config.extra.about_facts %}
-    <aside class="about-aside">
-      {% for fact in config.extra.about_facts %}
-      <div class="aside-row">
-        <span class="aside-key">{{ fact.key }}</span>
-        <span class="aside-val">{{ fact.value }}</span>
+  <div class="inner">
+    <div class="sect-label">About</div>
+    <div class="about-grid">
+      <div class="about-text">
+        {{ section.content | safe }}
       </div>
-      {% endfor %}
-    </aside>
-    {% endif %}
+      {% if config.extra.about_facts %}
+      <aside class="about-aside">
+        {% for fact in config.extra.about_facts %}
+        <div class="aside-row">
+          <span class="aside-key">{{ fact.key }}</span>
+          <span class="aside-val">{{ fact.value }}</span>
+        </div>
+        {% endfor %}
+      </aside>
+      {% endif %}
+    </div>
   </div>
 </section>
 
@@ -39,23 +43,25 @@
 {% set work = get_section(path="work/_index.md") %}
 {% if work.pages %}
 <section class="sect">
-  <div class="sect-label">Selected work</div>
-  <div class="work-grid">
-    {% for page in work.pages | slice(end=3) %}
-    <a href="{{ page.permalink }}" class="work-card">
-      {% if page.extra.thumb_image %}
-      <img class="work-card-thumb" src="{{ page.extra.thumb_image }}" alt="{{ page.title }}">
-      {% else %}
-      <div class="work-card-thumb work-card-thumb--{{ page.extra.thumb_tone | default(value='mid') }}"></div>
-      {% endif %}
-      <div class="work-card-body">
-        <div class="work-card-title">{{ page.title }}</div>
-        {% if page.description %}
-        <div class="work-card-meta">{{ page.description }}</div>
+  <div class="inner">
+    <div class="sect-label">Selected work</div>
+    <div class="work-grid">
+      {% for page in work.pages | slice(end=3) %}
+      <a href="{{ page.permalink }}" class="work-card">
+        {% if page.extra.thumb_image %}
+        <img class="work-card-thumb" src="{{ page.extra.thumb_image }}" alt="{{ page.title }}">
+        {% else %}
+        <div class="work-card-thumb work-card-thumb--{{ page.extra.thumb_tone | default(value='mid') }}"></div>
         {% endif %}
-      </div>
-    </a>
-    {% endfor %}
+        <div class="work-card-body">
+          <div class="work-card-title">{{ page.title }}</div>
+          {% if page.description %}
+          <div class="work-card-meta">{{ page.description }}</div>
+          {% endif %}
+        </div>
+      </a>
+      {% endfor %}
+    </div>
   </div>
 </section>
 {% endif %}
@@ -64,14 +70,16 @@
 {% set writing = get_section(path="writing/_index.md") %}
 {% if writing.pages %}
 <section class="sect">
-  <div class="sect-label">Writing</div>
-  <div class="writing-list">
-    {% for page in writing.pages | slice(end=5) %}
-    <a href="{{ page.permalink }}" class="writing-row">
-      <span class="writing-title">{{ page.title }}</span>
-      <span class="writing-date">{{ page.date | date(format="%b %Y") }}</span>
-    </a>
-    {% endfor %}
+  <div class="inner">
+    <div class="sect-label">Writing</div>
+    <div class="writing-list">
+      {% for page in writing.pages | slice(end=5) %}
+      <a href="{{ page.permalink }}" class="writing-row">
+        <span class="writing-title">{{ page.title }}</span>
+        <span class="writing-date">{{ page.date | date(format="%b %Y") }}</span>
+      </a>
+      {% endfor %}
+    </div>
   </div>
 </section>
 {% endif %}

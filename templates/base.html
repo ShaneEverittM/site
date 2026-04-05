@@ -10,12 +10,13 @@
 </head>
 <body>
 
-  <div class="site-wrap">
   <nav class="site-nav">
-    <a class="site-logo" href="{{ get_url(path='/') }}">{{ config.title }}</a>
-    <div class="nav-links">
-      <a href="{{ get_url(path='/work') }}">Work</a>
-      <a href="{{ get_url(path='/writing') }}">Writing</a>
+    <div class="inner">
+      <a class="site-logo" href="{{ get_url(path='/') }}">{{ config.title }}</a>
+      <div class="nav-links">
+        <a href="{{ get_url(path='/work') }}">Work</a>
+        <a href="{{ get_url(path='/writing') }}">Writing</a>
+      </div>
     </div>
   </nav>
 
@@ -24,20 +25,21 @@
   </main>
 
   <footer class="site-footer">
-    <span class="footer-name">{{ config.title }}</span>
-    <div class="footer-links">
-      {% if config.extra.github %}
-        <a href="{{ config.extra.github }}">GitHub</a>
-      {% endif %}
-      {% if config.extra.linkedin %}
-        <a href="{{ config.extra.linkedin }}">LinkedIn</a>
-      {% endif %}
-      {% if config.extra.email %}
-        <a href="mailto:{{ config.extra.email }}">Email</a>
-      {% endif %}
+    <div class="inner">
+      <span class="footer-name">{{ config.title }}</span>
+      <div class="footer-links">
+        {% if config.extra.github %}
+          <a href="{{ config.extra.github }}">GitHub</a>
+        {% endif %}
+        {% if config.extra.linkedin %}
+          <a href="{{ config.extra.linkedin }}">LinkedIn</a>
+        {% endif %}
+        {% if config.extra.email %}
+          <a href="mailto:{{ config.extra.email }}">Email</a>
+        {% endif %}
+      </div>
     </div>
   </footer>
 
-  </div>
 </body>
 </html>
