@@ -26,7 +26,7 @@ value = "Spaceraft Software Engineer"
 
 [[extra.about_facts]]
 key = "Stack"
-value = "Rust, Python, Yocto"
+value = "Rust, Python, QEMU, Yocto"
 
 [[extra.about_facts]]
 key = "Instruments"
