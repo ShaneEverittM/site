@@ -2,6 +2,7 @@
 
 {% block content %}
 <section class="sect">
+  <div class="inner">
   <div class="sect-label">{{ section.title }}</div>
   <div class="writing-list">
     {% for page in section.pages %}
@@ -12,6 +13,7 @@
       {% endif %}
     </a>
     {% endfor %}
+  </div>
   </div>
 </section>
 {% endblock content %}
