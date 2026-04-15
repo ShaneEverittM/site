@@ -12,8 +12,11 @@
     <div class="sect-label">
       {%- if page.taxonomies.tags %}
         {{ page.taxonomies.tags | join(sep=" · ") }}
+      {%- elif page.ancestors %}
+        {%- set parent = get_section(path=page.ancestors | last) %}
+        {{ parent.title }}
       {%- else %}
-        {{ page.ancestors | last | default(value="Writing") }}
+        Writing
       {%- endif %}
     </div>
     <h1 style="font-size: 36px; font-weight: normal; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 0.75rem;">
@@ -28,6 +31,7 @@
 
   <div class="prose">
     {{ page.content | safe }}
+    <iframe src="https://claude.site/public/artifacts/b1d84d05-a805-457d-b81e-9469304c81ff/embed" title="workout_program.jsx" width="100%" height="600" frameborder="0" allow="clipboard-write" allowfullscreen></iframe>
   </div>
 
 </div>
