@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }} — {{ config.title }}{% endblock title %}
+
+{% block content %}
+{% set data = load_data(path="data/workout_program.json") %}
+
+<article class="sect">
+<div class="inner">
+
+  <header class="wp-header">
+    <div class="sect-label">{{ data.meta.tag }}</div>
+    <h1 style="font-size: 36px; font-weight: normal; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 0.75rem;">
+      {{ data.meta.title }}
+    </h1>
+    <p class="wp-desc">{{ data.meta.description }}</p>
+  </header>
+
+  {# ── Weekly Volume ── #}
+  <div class="wp-vol-box">
+    <div class="sect-label">Weekly Volume Summary</div>
+    <div class="wp-vol-grid">
+      {% for v in data.volume_summary %}
+      <div class="wp-vol-item">
+        <div class="wp-vol-num">{{ v.sets }}</div>
+        <div class="wp-vol-name">{{ v.group }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  {# ── Day Cards ── #}
+  {% for day in data.days %}
+  {% set is_rest = day.exercises | length == 0 %}
+  <details class="wp-day">
+    <summary>
+      <div>
+        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 4px;">
+          <span class="sect-label" style="margin-bottom: 0;">{{ day.name }}</span>
+          {% if not is_rest %}
+          <span class="wp-badge">{{ day.exercises | length }} exercises</span>
+          {% endif %}
+        </div>
+        <div class="wp-day-title">{{ day.title }}</div>
+        <div class="wp-day-sub">{{ day.subtitle }}</div>
+      </div>
+      <span class="wp-chevron">▾</span>
+    </summary>
+
+    <div class="wp-day-body">
+
+      <div class="wp-rationale">{{ day.rationale }}</div>
+
+      {# Science evidence cards #}
+      {% if day.science_keys | length > 0 %}
+      <div style="margin-bottom: 1rem;">
+        {% for sk in day.science_keys %}
+          {% for note_key, note in data.science_notes %}
+            {% if note_key == sk %}
+            <details class="wp-sci">
+              <summary>
+                <span>{{ note.title }}</span>
+                <span class="sect-label" style="margin-bottom: 0;">Evidence</span>
+              </summary>
+              <div class="wp-sci-body">
+                <p>{{ note.body }}</p>
+                <p class="wp-sci-source">{{ note.source }}</p>
+              </div>
+            </details>
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      {# Exercise list #}
+      {% if day.exercises | length > 0 %}
+      <div>
+        {% for ex in data.days[loop.index0].exercises %}
+        <div class="wp-ex">
+          <div class="wp-ex-num {% if ex.primary %}is-primary{% else %}is-secondary{% endif %}">{{ loop.index }}</div>
+          <div>
+            <div class="wp-ex-name">{{ ex.name }}</div>
+            <div class="wp-ex-notes">{{ ex.notes }}</div>
+          </div>
+          <div class="wp-ex-sets">{{ ex.sets }}</div>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+    </div>
+  </details>
+  {% endfor %}
+
+  {# ── Progression ── #}
+  <details class="wp-day">
+    <summary>
+      <div>
+        <div class="sect-label" style="margin-bottom: 4px;">Progression</div>
+        <div class="wp-day-title">{{ data.progression.title }}</div>
+      </div>
+      <span class="wp-chevron">▾</span>
+    </summary>
+    <div class="wp-day-body">
+      {% for phase in data.progression.phases %}
+      <div class="wp-phase">
+        <div class="wp-phase-name">{{ phase.name }}</div>
+        <p class="wp-phase-desc">{{ phase.description }}</p>
+        <div class="wp-phase-targets">
+          {% for t in phase.targets %}
+          <span class="wp-phase-target">{{ t }}</span>
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </details>
+
+  {# ── Nutrition ── #}
+  <details class="wp-day">
+    <summary>
+      <div>
+        <div class="sect-label" style="margin-bottom: 4px;">Nutrition</div>
+        <div class="wp-day-title">Recomp Nutrition Guidelines</div>
+      </div>
+      <span class="wp-chevron">▾</span>
+    </summary>
+    <div class="wp-day-body">
+
+      {% for sk in data.nutrition.science_keys %}
+        {% for note_key, note in data.science_notes %}
+          {% if note_key == sk %}
+          <details class="wp-sci" style="margin-bottom: 0.5rem;">
+            <summary>
+              <span>{{ note.title }}</span>
+              <span class="sect-label" style="margin-bottom: 0;">Evidence</span>
+            </summary>
+            <div class="wp-sci-body">
+              <p>{{ note.body }}</p>
+              <p class="wp-sci-source">{{ note.source }}</p>
+            </div>
+          </details>
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+
+      <div style="margin-top: 1rem;">
+        {% for item in data.nutrition.items %}
+        <div class="wp-nutr-row">
+          <div>
+            <div class="sect-label" style="margin-bottom: 4px;">{{ item.label }}</div>
+            <div class="wp-nutr-value">{{ item.value }}</div>
+          </div>
+          <div class="wp-nutr-detail">{{ item.detail }}</div>
+        </div>
+        {% endfor %}
+      </div>
+
+    </div>
+  </details>
+
+  {# ── Sources ── #}
+  <div class="wp-sources">
+    <div class="sect-label" style="margin-bottom: 0.5rem;">Key Sources</div>
+    <p class="wp-sources-text">{{ data.sources }}</p>
+  </div>
+
+</div>
+</article>
+
+{% endblock content %}
