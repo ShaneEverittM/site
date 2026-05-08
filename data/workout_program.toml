@@ -235,6 +235,7 @@ source = "Negrete et al. Int J Sports Phys Ther. 2013. Kolber et al. JSCR. 2009.
 # ─────────────────────────────────────────────────────────────────────
 
 [[days]]
+id = "monday"
 name = "Monday"
 title = "Heavy Compound Strength"
 subtitle = "3×5 Linear Progression"
@@ -252,38 +253,47 @@ every session, and 5lbs to bench/OHP every week. Linear progression on a \
 """
 
 [[days.exercises]]
+id = "barbell_squat"
 name = "Barbell Back Squat"
 sets = "3×5"
 sets_n = 3
 volume = ["quads"]
+progression = { kind = "linear", increment_lbs = 5, cadence = "session" }
 notes = "Work weight. Add 5lbs per session. Full depth (hip crease below knee). 2-3 min rest between sets."
 primary = true
 
 [[days.exercises]]
+id = "barbell_bench"
 name = "Barbell Bench Press"
 sets = "3×5"
 sets_n = 3
 volume = ["chest"]
+progression = { kind = "linear", increment_lbs = 5, cadence = "session" }
 notes = "Work weight. Add 5lbs per week. Full ROM, pause briefly on chest. 2-3 min rest."
 primary = true
 
 [[days.exercises]]
+id = "barbell_ohp"
 name = "Barbell Overhead Press"
 sets = "3×5"
 sets_n = 3
 volume = ["front_delts"]
+progression = { kind = "linear", increment_lbs = 2.5, cadence = "session" }
 notes = "Work weight. Add 2.5-5lbs per week. Strict press, no leg drive. 2-3 min rest."
 primary = true
 
 [[days.exercises]]
+id = "barbell_row_pendlay"
 name = "Barbell Row (Pendlay)"
 sets = "3×8"
 sets_n = 3
 volume = ["back"]
+progression = { kind = "linear", increment_lbs = 5, cadence = "session" }
 notes = "From floor each rep. Adds horizontal pulling volume to balance the bench and OHP work."
 primary = false
 
 [[days.exercises]]
+id = "face_pulls"
 name = "Face Pulls (Tonal or band)"
 sets = "3×15"
 sets_n = 3
@@ -293,6 +303,7 @@ primary = false
 
 
 [[days]]
+id = "tuesday"
 name = "Tuesday"
 title = "Kettlebell Functional"
 subtitle = "Unilateral & Cross-Body Patterns"
@@ -306,6 +317,7 @@ your strong side.\
 """
 
 [[days.exercises]]
+id = "kb_turkish_getup"
 name = "Turkish Get-Up"
 sets = "3×2 per side"
 sets_n = 3
@@ -314,6 +326,7 @@ notes = "Slow and controlled. This is a full-body mobility and stability drill d
 primary = true
 
 [[days.exercises]]
+id = "kb_swing_single_arm"
 name = "Single-Arm KB Swing"
 sets = "5×10 per side"
 sets_n = 5
@@ -322,6 +335,7 @@ notes = "Hip hinge, not squat. Explosive hip extension. Anti-rotation demand is 
 primary = true
 
 [[days.exercises]]
+id = "kb_clean_press_single_arm"
 name = "Single-Arm KB Clean & Press"
 sets = "4×5 per side"
 sets_n = 4
@@ -330,6 +344,7 @@ notes = "Rack clean, then strict press. Builds unilateral pressing strength and 
 primary = true
 
 [[days.exercises]]
+id = "kb_sl_rdl"
 name = "KB Single-Leg Romanian Deadlift"
 sets = "3×8 per side"
 sets_n = 3
@@ -338,6 +353,7 @@ notes = "Hold KB in opposite hand (contralateral). Develops posterior chain and 
 primary = false
 
 [[days.exercises]]
+id = "kb_windmill"
 name = "KB Windmill"
 sets = "3×5 per side"
 sets_n = 3
@@ -346,6 +362,7 @@ notes = "Thoracic rotation under load. Directly addresses the posture and mobili
 primary = false
 
 [[days.exercises]]
+id = "kb_lateral_lunge"
 name = "KB Goblet Lateral Lunge"
 sets = "3×8 per side"
 sets_n = 3
@@ -355,6 +372,7 @@ primary = false
 
 
 [[days]]
+id = "wednesday"
 name = "Wednesday"
 title = "Hypertrophy Compounds"
 subtitle = "Lighter Variations · 3×8-12"
@@ -371,6 +389,7 @@ strength and hypertrophy when volume is equated.\
 """
 
 [[days.exercises]]
+id = "front_squat"
 name = "Front Squat or Goblet Squat (heavy DB)"
 sets = "3×10"
 sets_n = 3
@@ -379,6 +398,7 @@ notes = "Different squat pattern from Monday — front-loaded forces more uprigh
 primary = true
 
 [[days.exercises]]
+id = "db_bench"
 name = "Dumbbell Bench Press"
 sets = "3×10"
 sets_n = 3
@@ -387,6 +407,7 @@ notes = "Greater ROM than barbell and forces each arm to stabilize independently
 primary = true
 
 [[days.exercises]]
+id = "db_ohp"
 name = "Dumbbell Overhead Press (seated)"
 sets = "3×10"
 sets_n = 3
@@ -395,6 +416,7 @@ notes = "Seated removes leg drive entirely — pure shoulder strength. Lighter t
 primary = true
 
 [[days.exercises]]
+id = "incline_db_press"
 name = "Incline DB Press"
 sets = "3×10"
 sets_n = 3
@@ -403,6 +425,7 @@ notes = "Targets upper chest and front delts, which are harder to hit with flat 
 primary = false
 
 [[days.exercises]]
+id = "prone_y_raises"
 name = "Prone Y-Raises (DB or bench)"
 sets = "3×12"
 sets_n = 3
@@ -411,6 +434,7 @@ notes = "POSTURE CORRECTION: Lie face-down on an incline bench, arms hanging. Ra
 primary = false
 
 [[days.exercises]]
+id = "tricep_pushdown"
 name = "Tricep Pushdown (Tonal)"
 sets = "3×12"
 sets_n = 3
@@ -419,6 +443,7 @@ notes = "Isolation work for triceps — the limiting muscle on both bench and OH
 primary = false
 
 [[days.exercises]]
+id = "lateral_raises_db"
 name = "Lateral Raises (DB)"
 sets = "3×15"
 sets_n = 3
@@ -428,6 +453,7 @@ primary = false
 
 
 [[days]]
+id = "thursday"
 name = "Thursday"
 title = "Conditioning + Mobility"
 subtitle = "Work Capacity & Posture Correction"
@@ -444,6 +470,7 @@ within 2-3 weeks.\
 """
 
 [[days.exercises]]
+id = "kb_complex"
 name = "KB Complex: Swing → Clean → Press → Squat"
 sets = "4 rounds × 5 reps per movement, each arm"
 sets_n = 0
@@ -452,6 +479,7 @@ notes = "Use a moderate KB. Run all 4 movements on one arm, switch, repeat — t
 primary = true
 
 [[days.exercises]]
+id = "farmers_carry"
 name = "Farmer's Carries (heavy DBs)"
 sets = "4 × 40m (2 two-handed, 2 single-arm per side)"
 sets_n = 0
@@ -460,6 +488,7 @@ notes = "Grip, traps, core, everything. Walk tall. Two rounds two-handed, then t
 primary = true
 
 [[days.exercises]]
+id = "assisted_pullups"
 name = "X-Bar Assisted Pullups or Lat Pulldown (Tonal)"
 sets = "3 × AMRAP (1-2 reps shy of failure)"
 sets_n = 3
@@ -468,6 +497,7 @@ notes = "Vertical pulling — essential for lat development and shoulder health.
 primary = true
 
 [[days.exercises]]
+id = "band_pull_aparts"
 name = "Band Pull-Aparts"
 sets = "3×20"
 sets_n = 3
@@ -476,6 +506,7 @@ notes = "Posture corrective. Retracts scapulae and strengthens mid/lower traps."
 primary = false
 
 [[days.exercises]]
+id = "upper_trap_release"
 name = "Upper Trap Release (lacrosse ball)"
 sets = "60-90 sec per side"
 sets_n = 0
@@ -484,6 +515,7 @@ notes = "TRAP CORRECTION: Pin lacrosse ball between dominant-side upper trap and
 primary = false
 
 [[days.exercises]]
+id = "neck_stretches_lateral"
 name = "Lateral Neck Stretches"
 sets = "30 sec × 3 per side"
 sets_n = 0
@@ -492,6 +524,7 @@ notes = "TRAP CORRECTION: Ear toward shoulder, gentle hand pressure. Focus extra
 primary = false
 
 [[days.exercises]]
+id = "t_spine_extensions"
 name = "Thoracic Spine Extensions (foam roller)"
 sets = "2×10"
 sets_n = 0
@@ -500,6 +533,7 @@ notes = "Lie on foam roller at upper back, hands behind head, extend over it. Di
 primary = false
 
 [[days.exercises]]
+id = "hip_stretch_90_90"
 name = "90/90 Hip Stretch"
 sets = "2 min per side"
 sets_n = 0
@@ -508,6 +542,7 @@ notes = "Internal and external hip rotation. Essential for squat depth and hip h
 primary = false
 
 [[days.exercises]]
+id = "wall_slides"
 name = "Wall Slides"
 sets = "3×10"
 sets_n = 0
@@ -517,6 +552,7 @@ primary = false
 
 
 [[days]]
+id = "friday"
 name = "Friday"
 title = "Pull & Posterior Chain Focus"
 subtitle = "Hypertrophy Rep Ranges (3×8-12)"
@@ -532,14 +568,17 @@ brings weekly back sets to ~19.\
 """
 
 [[days.exercises]]
+id = "barbell_deadlift"
 name = "Barbell Deadlift"
 sets = "3×5"
 sets_n = 3
 volume = ["posterior_chain", "back"]
+progression = { kind = "linear", increment_lbs = 5, cadence = "session" }
 notes = "Work weight but NOT max effort. Add 5lbs per session. Landing on Friday means 2 full rest days before Monday's squats — optimal spacing."
 primary = true
 
 [[days.exercises]]
+id = "assisted_pullups"
 name = "Assisted Pullups (band or Tonal) or Lat Pulldown"
 sets = "3×8"
 sets_n = 3
@@ -548,6 +587,7 @@ notes = "VERTICAL PULL: Second weekly exposure for adequate lat volume. Use a ba
 primary = true
 
 [[days.exercises]]
+id = "db_row"
 name = "Dumbbell Row"
 sets = "4×10 per side"
 sets_n = 4
@@ -556,6 +596,7 @@ notes = "Unilateral. Full stretch at bottom, squeeze shoulder blade at top. Buil
 primary = true
 
 [[days.exercises]]
+id = "dips"
 name = "Dips (bodyweight → weighted)"
 sets = "3×8-12"
 sets_n = 3
@@ -564,6 +605,7 @@ notes = "Use the dip station. Full ROM. Once you can do 3×12 easily, add weight
 primary = true
 
 [[days.exercises]]
+id = "db_shrug_single_arm"
 name = "Single-Arm DB Shrug"
 sets = "2×12 per side"
 sets_n = 2
@@ -572,6 +614,7 @@ notes = "TRAP CORRECTION: Light weight, activation-focused. Start with weaker (n
 primary = false
 
 [[days.exercises]]
+id = "face_pulls"
 name = "Face Pulls"
 sets = "3×15"
 sets_n = 3
@@ -580,6 +623,7 @@ notes = "Twice per week is appropriate for correcting anterior dominance. Light,
 primary = false
 
 [[days.exercises]]
+id = "hammer_curls"
 name = "Hammer Curls (DB)"
 sets = "3×10"
 sets_n = 3
@@ -588,6 +632,7 @@ notes = "Builds brachioradialis and bicep. Neutral grip is easier on the elbows 
 primary = false
 
 [[days.exercises]]
+id = "pallof_press"
 name = "Pallof Press (Tonal)"
 sets = "3×10 per side"
 sets_n = 3
@@ -596,6 +641,7 @@ notes = "Anti-rotation core work. Far more functional than crunches. The Tonal's
 primary = false
 
 [[days.exercises]]
+id = "dead_bugs"
 name = "Dead Bugs"
 sets = "3×8 per side"
 sets_n = 3
@@ -605,6 +651,7 @@ primary = false
 
 
 [[days]]
+id = "weekend"
 name = "Saturday & Sunday"
 title = "Full Rest"
 subtitle = "Recovery & Nutrition Focus"

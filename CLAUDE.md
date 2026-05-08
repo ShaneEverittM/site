@@ -17,3 +17,9 @@ Hand-tallied summary fields drift the moment the data changes. If a stats panel,
 If the in-template aggregation gets too gnarly, the next step is a Zola `load_data` shortcode or a build-time preprocessor — not pre-computed fields in the source data.
 
 Reference implementation: `templates/workout-program.html` weekly volume block — each exercise carries `sets_n` and `volume = ["slug", ...]`, and the template sums per muscle group at render time.
+
+### Architectural decisions are recorded as ADRs
+
+Load-bearing design choices are committed as Architecture Decision Records under `docs/adr/`. Don't make a decision that would be confusing or annoying to reverse without writing an ADR for it. See `docs/adr/README.md` for the format and `docs/roadmap.md` for the in-flight roadmap.
+
+When a decision changes, write a new ADR that supersedes the old one — never edit an Accepted ADR in place. The git log of `docs/adr/` is the architectural changelog.
