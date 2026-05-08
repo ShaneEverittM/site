@@ -18,13 +18,32 @@
 
   {# ── Weekly Volume ── #}
   <div class="wp-vol-box">
-    <div class="sect-label">Weekly Volume Summary</div>
+    <div class="sect-label">Weekly Volume vs. Target</div>
     <div class="wp-vol-grid">
-      {% for v in data.volume_summary %}
-      <div class="wp-vol-item">
-        <div class="wp-vol-num">{{ v.sets }}</div>
-        <div class="wp-vol-name">{{ v.group }}</div>
-      </div>
+      {% for v in data.volume_targets %}
+        {% set_global vt_total = 0 %}
+        {% set_global vt_items = [] %}
+        {% for day in data.days %}
+          {% for ex in day.exercises %}
+            {% if ex.volume and v.slug in ex.volume %}
+              {% set_global vt_total = vt_total + ex.sets_n %}
+              {% set_global vt_items = vt_items | concat(with=ex.name ~ " " ~ ex.sets_n) %}
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+        {% set status = "ok" %}
+        {% if vt_total < v.target_min %}{% set status = "under" %}{% endif %}
+        {% if vt_total > v.target_max %}{% set status = "over" %}{% endif %}
+        <details class="wp-vol-item is-{{ status }}">
+          <summary>
+            <div class="wp-vol-num">{{ vt_total }}</div>
+            <div class="wp-vol-target">
+              target {{ v.target_min }}–{{ v.target_max }}{% if status == "under" %} ↓{% elif status == "over" %} ↑{% endif %}
+            </div>
+            <div class="wp-vol-name">{{ v.group }}</div>
+          </summary>
+          <div class="wp-vol-notes">{{ vt_items | join(sep=" · ") }}</div>
+        </details>
       {% endfor %}
     </div>
   </div>
