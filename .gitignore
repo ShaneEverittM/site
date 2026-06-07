@@ -1,3 +1,7 @@
 public/
 .idea/
 .claude
+
+# Nix build output
+result
+result-*
