@@ -26,3 +26,4 @@ A starter template is at `0000-template.md`. Copy it, renumber, fill it in.
 | [0004](0004-ci-rebuild-filtering.md) | CI rebuild filtering for session-only commits | Accepted |
 | [0005](0005-progression-rule-encoding.md) | Encoding progression rules in the program TOML | Accepted |
 | [0006](0006-session-json-schema.md) | Session JSON schema | Accepted |
+| [0007](0007-nix-build-tooling.md) | Nix flake as the build toolchain | Accepted |

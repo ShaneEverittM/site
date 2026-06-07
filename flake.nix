@@ -42,7 +42,7 @@
           '';
         in
         {
-          default = self.apps.${pkgs.system}.serve;
+          default = self.apps.${pkgs.stdenv.hostPlatform.system}.serve;
           serve = {
             type = "app";
             program = "${serve}/bin/serve";

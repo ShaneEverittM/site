@@ -19,13 +19,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Zola
-        uses: taiki-e/install-action@v2
-        with:
-          tool: zola@0.22.1
+      - name: Install Nix
+        uses: DeterminateSystems/determinate-nix-action@v3
 
       - name: Build
-        run: zola build
+        run: nix build --print-build-logs
+
+      # `nix build` writes ./result as a symlink into the read-only store;
+      # dereference it into a plain directory the Pages artifact step can tar.
+      - name: Stage artifact
+        run: cp -rL result public
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
