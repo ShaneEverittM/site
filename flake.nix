@@ -31,6 +31,24 @@
       devShells = forAllSystems (pkgs: {
         default = pkgs.mkShell {
           packages = [ pkgs.zola ];
+          # `nix develop` drops into a bash subshell. When launched from Warp,
+          # emit Warp's bootstrap escape sequence so the subshell gets blocks,
+          # completions, etc.
+          #
+          # Two guards:
+          #   - $- contains `i` only for an interactive shell. Under direnv the
+          #     hook runs non-interactively inside the already-warpified host
+          #     shell, so there's no subshell to bootstrap — skip it there.
+          #   - $TERM_PROGRAM makes it a no-op outside Warp.
+          shellHook = ''
+            case $- in
+              *i*)
+                if [ "$TERM_PROGRAM" = "WarpTerminal" ]; then
+                  printf '\eP$f{"hook": "SourcedRcFileForWarp", "value": { "shell": "bash" }}\x9c'
+                fi
+                ;;
+            esac
+          '';
         };
       });
 
