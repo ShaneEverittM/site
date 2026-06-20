@@ -1,7 +1,9 @@
-name: Deploy to GitHub Pages
+name: Build and Deploy
 
 on:
   push:
+    branches: [main]
+  pull_request:
     branches: [main]
 
 permissions:
@@ -9,8 +11,10 @@ permissions:
   pages: write
   id-token: write
 
+# Scope concurrency per ref so PR builds cancel their own stale runs
+# without ever cancelling (or being cancelled by) the main deploy.
 concurrency:
-  group: pages
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -27,16 +31,20 @@ jobs:
 
       # `nix build` writes ./result as a symlink into the read-only store;
       # dereference it into a plain directory the Pages artifact step can tar.
+      # Only needed on main — PRs stop after the build above to verify it.
       - name: Stage artifact
+        if: github.event_name == 'push'
         run: cp -rL result public
 
       - name: Upload artifact
+        if: github.event_name == 'push'
         uses: actions/upload-pages-artifact@v5
         with:
           path: public
 
   deploy:
     needs: build
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
