@@ -5,3 +5,4 @@ public/
 # Nix build output
 result
 result-*
+.direnv/
