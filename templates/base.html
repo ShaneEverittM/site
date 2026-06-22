@@ -34,7 +34,7 @@
         <a href="{{ get_url(path='/work') }}">Work</a>
         <a href="{{ get_url(path='/writing') }}">Writing</a>
         <a href="{{ get_url(path='/fitness') }}">Fitness</a>
-        <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Switch theme">Light</button>
+        <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Switch theme">System</button>
       </div>
     </div>
   </nav>
@@ -60,7 +60,8 @@
     </div>
   </footer>
 
-  {# Light/Dark toggle. No stored choice ⇒ follow the OS via prefers-color-scheme. #}
+  {# Three-way theme toggle: System → Light → Dark → System. "System" stores no
+     choice and follows the OS live via prefers-color-scheme. #}
   <script>
     (function () {
       var root = document.documentElement;
@@ -70,30 +71,41 @@
       var hlLight = document.getElementById("hl-light");
       var hlDark = document.getElementById("hl-dark");
 
-      function effective() {
+      // The visitor's selected mode. Anything but "light"/"dark" means "system".
+      function mode() {
         var t = localStorage.getItem("theme");
-        if (t === "dark" || t === "light") return t;
+        return t === "dark" || t === "light" ? t : "system";
+      }
+      // The mode resolved to an actual palette.
+      function effective() {
+        var m = mode();
+        if (m !== "system") return m;
         return mq.matches ? "dark" : "light";
       }
       function render() {
+        var m = mode();
         var dark = effective() === "dark";
-        if (btn) btn.textContent = dark ? "Dark" : "Light";
+        if (btn) btn.textContent = m.charAt(0).toUpperCase() + m.slice(1);
+        // In system mode, drop the override so CSS prefers-color-scheme drives it.
+        if (m === "system") root.removeAttribute("data-theme");
+        else root.setAttribute("data-theme", m);
         if (hlLight) hlLight.media = dark ? "not all" : "all";
         if (hlDark) hlDark.media = dark ? "all" : "not all";
       }
 
       render();
       if (btn) {
+        var next = { system: "light", light: "dark", dark: "system" };
         btn.addEventListener("click", function () {
-          var next = effective() === "dark" ? "light" : "dark";
-          root.setAttribute("data-theme", next);
-          localStorage.setItem("theme", next);
+          var n = next[mode()];
+          if (n === "system") localStorage.removeItem("theme");
+          else localStorage.setItem("theme", n);
           render();
         });
       }
-      // Track OS changes while the visitor has made no explicit choice.
+      // Track OS changes while the visitor is following the system.
       mq.addEventListener("change", function () {
-        if (localStorage.getItem("theme") === null) render();
+        if (mode() === "system") render();
       });
     })();
   </script>
