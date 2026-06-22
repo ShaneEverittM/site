@@ -1,4 +1,4 @@
-// ─── Birch & Cream — raw stops ───────────────────────────────────────────────
+// ─── Birch & Cream — raw stops (light) ───────────────────────────────────────
 
 $parchment : #F7F2E8;   // lightest bg
 $raw-linen : #E6DBCB;   // surface / footer bg
@@ -7,7 +7,31 @@ $caramel   : #9A7A5E;   // accent text, labels, links
 $bark      : #634D3A;   // body / supporting text
 $espresso  : #3A2B1E;   // headings, strong text
 
-// ─── Semantic CSS custom properties ──────────────────────────────────────────
+// ─── Slate — raw stops (dark) ────────────────────────────────────────────────
+
+$slate-bg      : #14171A;   // lightest bg
+$slate-surface : #1C2024;   // surface / footer bg
+$slate-border  : #2C3238;   // borders, dividers
+$slate-muted   : #8A95A0;   // accent text, labels, links
+$slate-body    : #C2CAD2;   // body / supporting text
+$slate-heading : #F0F3F6;   // headings, strong text
+
+// ─── Semantic tokens ─────────────────────────────────────────────────────────
+//
+// Every component reads from --color-*. A theme is just a re-binding of these
+// six variables. Resolution order:
+//   1. Explicit choice via [data-theme] (set by the toggle in base.html).
+//   2. OS preference via prefers-color-scheme, when no explicit choice is made.
+//   3. Light (the :root default) otherwise.
+
+@mixin slate-tokens {
+  --color-bg       : #{$slate-bg};
+  --color-surface  : #{$slate-surface};
+  --color-border   : #{$slate-border};
+  --color-muted    : #{$slate-muted};
+  --color-body     : #{$slate-body};
+  --color-heading  : #{$slate-heading};
+}
 
 :root {
   --color-bg       : #{$parchment};
@@ -16,4 +40,21 @@ $espresso  : #3A2B1E;   // headings, strong text
   --color-muted    : #{$caramel};
   --color-body     : #{$bark};
   --color-heading  : #{$espresso};
+
+  color-scheme: light;
+}
+
+// Explicit dark choice wins everywhere.
+[data-theme="dark"] {
+  @include slate-tokens;
+  color-scheme: dark;
+}
+
+// System preference — applied only when the visitor hasn't explicitly chosen.
+// An explicit [data-theme="light"] opts back out.
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    @include slate-tokens;
+    color-scheme: dark;
+  }
 }

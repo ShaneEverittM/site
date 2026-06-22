@@ -5,7 +5,7 @@ Living document. Updated as phases complete or assumptions change. The original 
 
 ## Context
 
-The site is a Zola SSG at shanemurphy.space (GitHub Pages, GitHub Actions deploy). It includes a workout program in
+The site is a Zola SSG at semurphy.com (GitHub Pages, GitHub Actions deploy). It includes a workout program in
 `data/workout_program.toml` with auto-derived volume targets per muscle group.
 
 The goal is a workout tracker that:
@@ -47,7 +47,7 @@ These touch every later phase, so resolving them first is load-bearing. Each wil
 
 1. **Hosting target.** Currently on GitHub Pages. The tracker write path needs a serverless function that can commit to
    the repo via the GitHub API.
-2. **Domain strategy.** Subdomain (`tracker.shanemurphy.space`) vs subpath (`/tracker`).
+2. **Domain strategy.** Subdomain (`tracker.semurphy.com`) vs subpath (`/tracker`).
 3. **Auth between phone and Worker.** Single-user shared secret vs OAuth-with-GitHub vs nothing-but-obscurity.
 4. **CI rebuild filtering.** Whether session-only commits should skip the tracker SPA rebuild.
 5. **Structured progression rules in TOML.** Whether to encode `progression = { kind, increment, cadence, deload }` now
@@ -102,9 +102,9 @@ without bundling them into a SPA build.
   adds one).
 - Verify program.json is fetchable from a deployed page.
 
-**Deliverable:** A live URL like `shanemurphy.space/program.json` that returns the compiled program.
+**Deliverable:** A live URL like `semurphy.com/program.json` that returns the compiled program.
 
-**Ready when:** `curl https://shanemurphy.space/program.json` returns valid JSON matching the schema agreed in Phase 0.
+**Ready when:** `curl https://semurphy.com/program.json` returns valid JSON matching the schema agreed in Phase 0.
 
 ---
 

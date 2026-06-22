@@ -1,4 +1,4 @@
-# shanemurphy.space
+# semurphy.com
 
 Personal portfolio and writing site for Shane Murphy. Built with [Zola](https://www.getzola.org/) and deployed to GitHub Pages.
 
@@ -17,19 +17,27 @@ No Node.js, no npm, no JavaScript build tooling.
 
 ## Local development
 
-Install Zola via Homebrew:
-
-```bash
-brew install zola
-```
+The toolchain is pinned by the Nix flake (see [ADR 0007](docs/adr/0007-nix-build-tooling.md)) — no separate Zola install needed.
 
 Serve locally with live reload:
 
 ```bash
-zola serve
+nix run
 ```
 
-The site is available at `http://127.0.0.1:1111`.
+This runs `zola serve` with the correct config; the site is available at `http://127.0.0.1:1111`.
+
+Build the site into `./result` (the rendered `public/` contents):
+
+```bash
+nix build
+```
+
+Or drop into a shell with the pinned Zola on `PATH` for ad-hoc commands:
+
+```bash
+nix develop
+```
 
 ## Deployment
 
@@ -40,12 +48,12 @@ Pushes to `main` automatically trigger the GitHub Actions workflow at `.github/w
 In the repository's **Settings → Pages**:
 
 - **Source:** GitHub Actions
-- **Custom domain:** `shanemurphy.space`
+- **Custom domain:** `semurphy.com`
 - **Enforce HTTPS:** enabled (once DNS has propagated)
 
 ## Custom domain DNS (Squarespace)
 
-The domain `shanemurphy.space` is registered through Squarespace Domains. The following DNS records must be set in the Squarespace DNS panel:
+The domain `semurphy.com` is registered through Squarespace Domains. The following DNS records must be set in the Squarespace DNS panel:
 
 ### A records (root domain)
 
