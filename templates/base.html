@@ -6,6 +6,23 @@
   <title>{% block title %}{{ config.title }}{% endblock title %}</title>
   <meta name="description" content="{% block description %}{{ config.description }}{% endblock description %}">
   <link rel="stylesheet" href="{{ get_url(path='main.css') }}">
+  {# Syntax-highlight palettes (Zola class-based). The media attributes are the
+     no-JS fallback: the OS preference picks one. The theme script overrides them
+     to honor an explicit toggle choice. #}
+  <link id="hl-light" rel="stylesheet" href="{{ get_url(path='giallo-light.css') }}" media="(prefers-color-scheme: light)">
+  <link id="hl-dark"  rel="stylesheet" href="{{ get_url(path='giallo-dark.css') }}"  media="(prefers-color-scheme: dark)">
+  {# Apply an explicit choice before first paint to avoid a flash of the wrong
+     palette. With no stored choice, CSS prefers-color-scheme handles it. #}
+  <script>
+    (function () {
+      var t = localStorage.getItem("theme");
+      if (t !== "dark" && t !== "light") return;          // no explicit choice ⇒ let CSS decide
+      document.documentElement.setAttribute("data-theme", t);
+      var l = document.getElementById("hl-light"), d = document.getElementById("hl-dark");
+      if (l) l.media = t === "light" ? "all" : "not all";
+      if (d) d.media = t === "dark"  ? "all" : "not all";
+    })();
+  </script>
   {% block extra_head %}{% endblock extra_head %}
 </head>
 <body>
@@ -17,6 +34,7 @@
         <a href="{{ get_url(path='/work') }}">Work</a>
         <a href="{{ get_url(path='/writing') }}">Writing</a>
         <a href="{{ get_url(path='/fitness') }}">Fitness</a>
+        <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Switch theme">Light</button>
       </div>
     </div>
   </nav>
@@ -41,6 +59,44 @@
       </div>
     </div>
   </footer>
+
+  {# Light/Dark toggle. No stored choice ⇒ follow the OS via prefers-color-scheme. #}
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var btn = document.getElementById("theme-toggle");
+      var mq = window.matchMedia("(prefers-color-scheme: dark)");
+
+      var hlLight = document.getElementById("hl-light");
+      var hlDark = document.getElementById("hl-dark");
+
+      function effective() {
+        var t = localStorage.getItem("theme");
+        if (t === "dark" || t === "light") return t;
+        return mq.matches ? "dark" : "light";
+      }
+      function render() {
+        var dark = effective() === "dark";
+        if (btn) btn.textContent = dark ? "Dark" : "Light";
+        if (hlLight) hlLight.media = dark ? "not all" : "all";
+        if (hlDark) hlDark.media = dark ? "all" : "not all";
+      }
+
+      render();
+      if (btn) {
+        btn.addEventListener("click", function () {
+          var next = effective() === "dark" ? "light" : "dark";
+          root.setAttribute("data-theme", next);
+          localStorage.setItem("theme", next);
+          render();
+        });
+      }
+      // Track OS changes while the visitor has made no explicit choice.
+      mq.addEventListener("change", function () {
+        if (localStorage.getItem("theme") === null) render();
+      });
+    })();
+  </script>
 
 </body>
 </html>

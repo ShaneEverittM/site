@@ -5,7 +5,9 @@ compile_sass = true
 minify_html = false
 
 [markdown.highlighting]
-theme = "catppuccin-latte"
+style = "class"
+light_theme = "catppuccin-latte"
+dark_theme = "catppuccin-mocha"
 
 [extra]
 hero_headline = "Engineer,<br>musician,<br>human."
@@ -14,7 +16,7 @@ hero_tags = ["Software", "Space", "Music", "Gaming"]
 
 github = "https://github.com/ShaneEverittM"
 linkedin = "https://www.linkedin.com/in/shane-everitt-murphy/"
-email = "mail@shanemurphy.space"
+email = "mail@semurphy.com"
 
 [[extra.about_facts]]
 key = "Location"

@@ -6,3 +6,6 @@ public/
 result
 result-*
 .direnv/
+
+# Zola class-based syntax highlighting — regenerated into static/ on every build
+static/giallo-*.css

@@ -1,13 +1,19 @@
 {
-  description = "shanemurphy.space — Zola static site";
+  description = "semurphy.com — Zola static site";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
 
-  outputs = { self, nixpkgs }:
+  outputs =
+    { self, nixpkgs }:
     let
-      systems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "x86_64-darwin"
+        "aarch64-darwin"
+      ];
       forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f nixpkgs.legacyPackages.${system});
     in
     {
@@ -31,29 +37,12 @@
       devShells = forAllSystems (pkgs: {
         default = pkgs.mkShell {
           packages = [ pkgs.zola ];
-          # `nix develop` drops into a bash subshell. When launched from Warp,
-          # emit Warp's bootstrap escape sequence so the subshell gets blocks,
-          # completions, etc.
-          #
-          # Two guards:
-          #   - $- contains `i` only for an interactive shell. Under direnv the
-          #     hook runs non-interactively inside the already-warpified host
-          #     shell, so there's no subshell to bootstrap — skip it there.
-          #   - $TERM_PROGRAM makes it a no-op outside Warp.
-          shellHook = ''
-            case $- in
-              *i*)
-                if [ "$TERM_PROGRAM" = "WarpTerminal" ]; then
-                  printf '\eP$f{"hook": "SourcedRcFileForWarp", "value": { "shell": "bash" }}\x9c'
-                fi
-                ;;
-            esac
-          '';
         };
       });
 
       # `nix run` / `nix run .#serve` → live-reloading dev server.
-      apps = forAllSystems (pkgs:
+      apps = forAllSystems (
+        pkgs:
         let
           serve = pkgs.writeShellScriptBin "serve" ''
             exec ${pkgs.zola}/bin/zola --config zola.toml serve "$@"
@@ -65,6 +54,7 @@
             type = "app";
             program = "${serve}/bin/serve";
           };
-        });
+        }
+      );
     };
 }

@@ -4,7 +4,13 @@ Project-level guidance for Claude Code working in this repo.
 
 ## Stack
 
-Zola static site generator. Content lives in `content/`, templates in `templates/`, styles in `sass/main.scss`, structured data in `data/`. No npm. Build with `zola build`; serve locally via the launch config in `.claude/launch.json`.
+Zola static site generator. Content lives in `content/`, templates in `templates/`, styles in `sass/main.scss`, structured data in `data/`. No npm.
+
+The toolchain is pinned by the Nix flake (ADR 0007), and config lives in `zola.toml` (a non-default name), so prefer the flake entrypoints over bare `zola`:
+
+- `nix build` — renders the site into `./result` (the rendered `public/` contents).
+- `nix run` (alias `nix run .#serve`) — starts the live-reloading dev server (`zola serve`) at `http://127.0.0.1:1111`.
+- `nix develop` — a shell with the pinned Zola on `PATH` for ad-hoc commands (pass `--config zola.toml`).
 
 ## Design rules
 
