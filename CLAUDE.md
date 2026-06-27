@@ -29,3 +29,17 @@ Reference implementation: `templates/workout-program.html` weekly volume block �
 Load-bearing design choices are committed as Architecture Decision Records under `docs/adr/`. Don't make a decision that would be confusing or annoying to reverse without writing an ADR for it. See `docs/adr/README.md` for the format and `docs/roadmap.md` for the in-flight roadmap.
 
 When a decision changes, write a new ADR that supersedes the old one — never edit an Accepted ADR in place. The git log of `docs/adr/` is the architectural changelog.
+
+## Agent skills
+
+### Issue tracker
+
+Issues are tracked in this repo's GitHub Issues via the `gh` CLI. External PRs are *not* a triage surface. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Default label vocabulary — `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context — one `CONTEXT.md` + `docs/adr/` at the repo root. See `docs/agents/domain.md`.
