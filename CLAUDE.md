@@ -30,6 +30,14 @@ Load-bearing design choices are committed as Architecture Decision Records under
 
 When a decision changes, write a new ADR that supersedes the old one — never edit an Accepted ADR in place. The git log of `docs/adr/` is the architectural changelog.
 
+## Git workflow
+
+Merge-based, **never force-push**. The history is a truthful record of what happened — don't rewrite it.
+
+- Integrate branches with `git merge` (let it make a merge commit when branches have diverged; don't fast-forward the topology away).
+- Keep a feature branch current by **merging `main` in**, not by rebasing onto it. After a PR lands, merge `main` back into any still-open sibling branches.
+- Never `git push --force` / `--force-with-lease`, and don't `git rebase` shared branches.
+
 ## Agent skills
 
 ### Issue tracker
