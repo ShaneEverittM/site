@@ -1,7 +1,6 @@
 # Workout Tracker — Roadmap
 
-Living document. Updated as phases complete or assumptions change. The original planning artifact is in
-`.claude/plans/`; this is the durable record committed to the repo.
+Living document. Updated as phases complete or assumptions change. The original planning artifact lived in a local, agent-specific scratch space (`.claude/plans/`); this is the durable record committed to the repo.
 
 ## Context
 
@@ -14,7 +13,7 @@ The goal is a workout tracker that:
   increments next session's target.
 - **Treats the program as mutable** — Shane revises it frequently with AI assistance, so the program file stays plain
   text in git.
-- **Treats logs as owned data** — sessions live in the same repo as JSON files, in a format both Claude and Shane can
+- **Treats logs as owned data** — sessions live in the same repo as JSON files, in a format both AI agents and Shane can
   read.
 - **Stays on free hosting.**
 - **Lives in the same monorepo as the static site.**
@@ -26,7 +25,7 @@ dedicated plan when it's reached.
 
 ## Project documentation strategy
 
-Design rationale persists in the repo, not in per-user/per-session scratch files. Future Claude sessions, future Shane,
+Design rationale persists in the repo, not in per-user/per-session scratch files. Future agent sessions, future Shane,
 and anyone else reading should be able to understand *why* the architecture is what it is from `git log` alone.
 
 Two artifacts are committed:
@@ -36,7 +35,7 @@ Two artifacts are committed:
 2. **Architecture Decision Records (ADRs)** at `docs/adr/`. Every meaningful design decision gets a short, numbered ADR.
    See `docs/adr/README.md` for the format and convention.
 
-The principle: **single source of truth, in the repo, AI-readable** — extending the same rule CLAUDE.md captured for UI
+The principle: **single source of truth, in the repo, AI-readable** — extending the same rule AGENTS.md captured for UI
 data to design rationale.
 
 ---
@@ -80,7 +79,7 @@ Each phase ends in a commit. Each will get its own plan when it starts.
 - Updated `workout_program.toml` with `id` + `progression` per exercise.
 - ADRs 0001–0005 committed to `docs/adr/`.
 - This roadmap committed to `docs/roadmap.md`.
-- CLAUDE.md updated to reference the ADR convention.
+- AGENTS.md updated to reference the ADR convention.
 - No tracker code yet.
 
 **Ready when:** All five cross-cutting decisions have an Accepted ADR; TOML has stable IDs; session JSON shape is
@@ -186,7 +185,7 @@ refresh.
   lift.
 - Optional: a `scripts/analyze.ts` (Bun) that emits a markdown summary of the last N weeks for paste-into-conversation.
 
-**Deliverable:** A documented, repeatable loop where every 4–8 weeks Shane asks Claude to review and propose program
+**Deliverable:** A documented, repeatable loop where every 4–8 weeks Shane asks an AI agent to review and propose program
 changes; Shane commits; tracker picks up the new program; history continues seamlessly via stable IDs.
 
 **Ready when:** One full review cycle has happened end-to-end and the program has been updated based on logged data.
@@ -221,7 +220,7 @@ changes; Shane commits; tracker picks up the new program; history continues seam
 - `data/workout_program.toml` — the program. Will gain `id` and `progression` fields in Phase 0.
 - `templates/workout-program.html` — already consumes the TOML at build time.
 - `.github/workflows/deploy.yml` — will gain steps in Phases 1, 2, 4.
-- `CLAUDE.md` — records project-wide rules. Will gain the ADR convention in Phase 0.
+- `AGENTS.md` — records project-wide agent rules (`CLAUDE.md` is a symlink to it; see ADR 0012). Will gain the ADR convention in Phase 0.
 - `docs/roadmap.md` (this file) — committed roadmap, revised as phases complete.
 - `docs/adr/000N-*.md` — one ADR per architectural decision.
 - (Future) `tracker/` — the SPA, scaffolded in Phase 2.
@@ -230,4 +229,4 @@ changes; Shane commits; tracker picks up the new program; history continues seam
 ## Verification approach
 
 Each phase has its own "Ready when" criterion above. The overall verification is a 4-week real-world trial: log every
-gym session, review logs with Claude, revise the program once, see continuity preserved.
+gym session, review logs with an AI agent, revise the program once, see continuity preserved.
